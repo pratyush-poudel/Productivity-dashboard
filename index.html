@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Smart Productivity Dashboard</title>
+    <meta
+      name="description"
+      content="A smart personal productivity dashboard with tasks, pomodoro timer, weather, quotes, and planner."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body data-theme="dark">
+    <div class="app-shell">
+      <header class="topbar glass-card">
+        <div>
+          <p class="eyebrow">Productivity Suite</p>
+          <h1>Smart Personal Dashboard</h1>
+        </div>
+
+        <div class="topbar-actions">
+          <div class="live-clock" id="liveClock" aria-live="polite"></div>
+          <button id="themeToggle" class="btn ghost" aria-label="Toggle theme">
+            <span id="themeLabel">Light Mode</span>
+          </button>
+        </div>
+      </header>
+
+      <main class="dashboard-grid">
+        <section class="card todo-card">
+          <div class="card-header">
+            <h2>To-Do List</h2>
+            <p>Stay focused on what matters.</p>
+          </div>
+
+          <form id="todoForm" class="todo-form">
+            <input
+              type="text"
+              id="todoInput"
+              placeholder="Add a new task..."
+              aria-label="Task title"
+              required
+            />
+            <button type="submit" class="btn primary">Add</button>
+          </form>
+
+          <div class="todo-filters" id="todoFilters">
+            <button class="chip active" data-filter="all">All</button>
+            <button class="chip" data-filter="active">Active</button>
+            <button class="chip" data-filter="completed">Completed</button>
+          </div>
+
+          <ul class="todo-list" id="todoList" aria-live="polite"></ul>
+        </section>
+
+        <section class="card pomodoro-card">
+          <div class="card-header">
+            <h2>Pomodoro Timer</h2>
+            <p>Work in focused intervals.</p>
+          </div>
+
+          <div class="pomodoro-meta">
+            <span id="sessionType">Focus Session</span>
+            <span id="sessionCount">Session #1</span>
+          </div>
+
+          <div class="timer-ring-wrap">
+            <svg class="timer-ring" width="220" height="220" viewBox="0 0 220 220">
+              <circle cx="110" cy="110" r="96" class="ring-bg"></circle>
+              <circle cx="110" cy="110" r="96" class="ring-progress" id="ringProgress"></circle>
+            </svg>
+            <div class="timer-value" id="timerValue">25:00</div>
+          </div>
+
+          <div class="timer-controls">
+            <button class="btn primary" id="startPauseBtn">Start</button>
+            <button class="btn ghost" id="resetTimerBtn">Reset</button>
+          </div>
+        </section>
+
+        <section class="card weather-card">
+          <div class="card-header">
+            <h2>Weather</h2>
+            <p>Current conditions in your city.</p>
+          </div>
+
+          <form id="weatherForm" class="weather-form">
+            <input
+              type="text"
+              id="cityInput"
+              placeholder="Enter city name"
+              aria-label="City name"
+            />
+            <button type="submit" class="btn primary">Search</button>
+            <button type="button" class="btn ghost" id="autoDetectWeatherBtn">
+              Auto Detect
+            </button>
+          </form>
+
+          <div id="weatherContent" class="weather-content">
+            <p class="placeholder">Search for a city or use auto detect.</p>
+          </div>
+        </section>
+
+        <section class="card quote-card">
+          <div class="card-header">
+            <h2>Motivational Quote</h2>
+            <p>Fuel your momentum.</p>
+          </div>
+          <blockquote id="quoteText">
+            "Success is the sum of small efforts, repeated day in and day out."
+          </blockquote>
+          <p id="quoteAuthor">- Robert Collier</p>
+          <button class="btn primary" id="newQuoteBtn">New Quote</button>
+        </section>
+
+        <section class="card planner-card">
+          <div class="card-header">
+            <h2>Daily Planner</h2>
+            <p>Plan your day with intention.</p>
+          </div>
+
+          <div class="planner-grid">
+            <label for="morningPlan">Morning</label>
+            <textarea id="morningPlan" placeholder="Top priorities..."></textarea>
+
+            <label for="afternoonPlan">Afternoon</label>
+            <textarea id="afternoonPlan" placeholder="Key work blocks..."></textarea>
+
+            <label for="eveningPlan">Evening</label>
+            <textarea id="eveningPlan" placeholder="Wrap-up and reflection..."></textarea>
+          </div>
+          <p class="planner-hint">Autosaves every change.</p>
+        </section>
+      </main>
+    </div>
+
+    <template id="todoItemTemplate">
+      <li class="todo-item">
+        <label class="todo-check-row">
+          <input type="checkbox" class="todo-check" />
+          <span class="todo-title"></span>
+        </label>
+        <button class="icon-btn danger" aria-label="Delete task">Delete</button>
+      </li>
+    </template>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
